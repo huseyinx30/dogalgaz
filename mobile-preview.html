@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doğalgaz CRM - Mobil Görünüm Önizleme</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Mobil simülasyonu için sabit genişlik */
+    @media (min-width: 480px) {
+      .mobile-frame {
+        max-width: 390px;
+        margin: 0 auto;
+        min-height: 100vh;
+        box-shadow: 0 0 0 2px #e5e7eb;
+        border-radius: 24px;
+        overflow: hidden;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-200 min-h-screen p-4">
+  <div class="mobile-frame bg-gray-50">
+    <!-- Mobil Header -->
+    <header class="bg-white border-b border-gray-200 px-4 py-3 sticky top-0 z-50">
+      <div class="flex items-center justify-between gap-2">
+        <button type="button" class="p-2 -ml-2 rounded-lg hover:bg-gray-100" aria-label="Menü">
+          <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+        <div class="flex-1 min-w-0">
+          <input type="search" placeholder="Ara..." class="w-full px-3 py-2 text-sm rounded-lg border border-gray-200 bg-gray-50">
+        </div>
+        <button class="p-2 rounded-lg hover:bg-gray-100 relative">
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+          </svg>
+          <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+        </button>
+        <div class="flex items-center gap-2 px-2">
+          <span class="text-sm font-medium text-gray-700 truncate max-w-[90px]">Kullanıcı</span>
+          <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        </div>
+      </div>
+    </header>
+
+    <!-- Ana İçerik -->
+    <main class="p-4 pb-8 space-y-4">
+      <h1 class="text-lg font-bold text-gray-900">Dashboard</h1>
+
+      <!-- Özet Kartlar - Tek sütun mobil -->
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="p-2 bg-blue-100 rounded-lg"><svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg></div>
+            <span class="text-xs text-gray-500">Müşteriler</span>
+          </div>
+          <p class="text-xl font-bold text-gray-900">24</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="p-2 bg-green-100 rounded-lg"><svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
+            <span class="text-xs text-gray-500">Satışlar</span>
+          </div>
+          <p class="text-xl font-bold text-gray-900">12</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="p-2 bg-orange-100 rounded-lg"><svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div>
+            <span class="text-xs text-gray-500">Ürünler</span>
+          </div>
+          <p class="text-xl font-bold text-gray-900">48</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="p-2 bg-purple-100 rounded-lg"><svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+            <span class="text-xs text-gray-500">Ekipler</span>
+          </div>
+          <p class="text-xl font-bold text-gray-900">4</p>
+        </div>
+      </div>
+
+      <!-- Hızlı İşlemler -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-100 font-semibold text-gray-900">Hızlı İşlemler</div>
+        <div class="p-4 grid grid-cols-2 gap-3">
+          <a href="#" class="flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 transition-colors">
+            <div class="p-2 bg-blue-100 rounded-lg"><svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1z"/></svg></div>
+            <div>
+              <p class="font-semibold text-sm text-gray-900">Yeni Müşteri</p>
+              <p class="text-xs text-gray-500">Müşteri ekle</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-colors">
+            <div class="p-2 bg-green-100 rounded-lg"><svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div>
+            <div>
+              <p class="font-semibold text-sm text-gray-900">Yeni Satış</p>
+              <p class="text-xs text-gray-500">Satış oluştur</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-orange-500 hover:bg-orange-50 transition-colors">
+            <div class="p-2 bg-orange-100 rounded-lg"><svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div>
+            <div>
+              <p class="font-semibold text-sm text-gray-900">Yeni Teklif</p>
+              <p class="text-xs text-gray-500">Teklif hazırla</p>
+            </div>
+          </a>
+          <a href="#" class="flex items-center gap-3 p-3 rounded-lg border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-colors">
+            <div class="p-2 bg-purple-100 rounded-lg"><svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
+            <div>
+              <p class="font-semibold text-sm text-gray-900">Ekip Yönetimi</p>
+              <p class="text-xs text-gray-500">Ekipleri yönet</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Yaklaşan İşler -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-4 py-3 border-b border-gray-100 font-semibold text-gray-900">Yaklaşan İşler</div>
+        <div class="p-4 space-y-2">
+          <div class="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
+            <span class="text-sm font-medium text-gray-900 truncate">Örnek Müşteri 1</span>
+            <span class="text-xs px-2 py-1 rounded-md bg-blue-100 text-blue-700 font-medium">Montaj</span>
+          </div>
+          <div class="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
+            <span class="text-sm font-medium text-gray-900 truncate">Örnek Müşteri 2</span>
+            <span class="text-xs px-2 py-1 rounded-md bg-amber-100 text-amber-700 font-medium">Keşif</span>
+          </div>
+          <div class="flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50">
+            <span class="text-sm font-medium text-gray-900 truncate">Örnek Müşteri 3</span>
+            <span class="text-xs px-2 py-1 rounded-md bg-green-100 text-green-700 font-medium">Teslim</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <p class="text-center text-sm text-gray-500 mt-4">
+    📱 Bu sadece bir önizleme. Gerçek uygulamayı test etmek için tarayıcıda F12 → cihaz simülasyonu (Ctrl+Shift+M) kullanın.
+  </p>
+</body>
+</html>

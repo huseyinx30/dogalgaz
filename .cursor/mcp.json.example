@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "supabase": {
+      "url": "https://mcp.supabase.com/mcp",
+      "headers": {
+        "Authorization": "Bearer YOUR_SUPABASE_ACCESS_TOKEN_HERE"
+      },
+      "args": [
+        "--project-ref",
+        "xwbmokmfajyoxbtbgooi"
+      ]
+    }
+  }
+}
