@@ -59,6 +59,22 @@ a,
   }
 }
 
+/* Mobil dokunmatik - tıklanabilir alanları büyüt */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Safe area - çentikli ekranlar için */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left, 0);
+    padding-right: env(safe-area-inset-right, 0);
+  }
+}
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;

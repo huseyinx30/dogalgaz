@@ -70,15 +70,15 @@ export default function PersonellerPage() {
 
   return (
     <MainLayout>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Personeller</h1>
-            <p className="text-gray-700 mt-2 font-medium">Ofis personeli ve yöneticileri</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Personeller</h1>
+            <p className="text-gray-600 sm:text-gray-700 mt-1 sm:mt-2 text-sm sm:text-base font-medium">Ofis personeli ve yöneticileri</p>
           </div>
           {showAddButton && (
-            <Link href="/personeller/new">
-              <Button className="bg-blue-600 hover:bg-blue-700">
+            <Link href="/personeller/new" className="w-full sm:w-auto">
+              <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700">
                 <Plus className="w-4 h-4 mr-2" />
                 Yeni Personel
               </Button>

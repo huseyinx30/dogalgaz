@@ -6,7 +6,7 @@ import { MainLayout } from '@/components/layout/main-layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Plus, Search, Loader2, Edit, Eye } from 'lucide-react';
+import { Plus, Search, Loader2, Edit, Eye, Phone, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase/client';
 import { formatCurrency } from '@/lib/utils';
@@ -92,14 +92,14 @@ export default function SuppliersPage() {
 
   return (
     <MainLayout>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Tedarikçiler</h1>
-            <p className="text-gray-700 mt-2 font-medium">Tedarikçi bilgilerini yönetin</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Tedarikçiler</h1>
+            <p className="text-gray-600 sm:text-gray-700 mt-1 sm:mt-2 text-sm sm:text-base font-medium">Tedarikçi bilgilerini yönetin</p>
           </div>
-          <Link href="/suppliers/new">
-            <Button>
+          <Link href="/suppliers/new" className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto">
               <Plus className="w-4 h-4 mr-2" />
               Yeni Tedarikçi
             </Button>
@@ -124,6 +124,65 @@ export default function SuppliersPage() {
               </div>
             </div>
 
+            {/* Mobil: Kart görünümü */}
+            <div className="md:hidden space-y-3">
+              {filteredSuppliers.length === 0 ? (
+                <p className="text-center text-gray-500 py-8">
+                  {searchTerm ? 'Arama sonucu bulunamadı' : 'Henüz tedarikçi eklenmemiş'}
+                </p>
+              ) : (
+                filteredSuppliers.map((supplier) => (
+                  <div
+                    key={supplier.id}
+                    className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-start justify-between gap-2 mb-2">
+                      <div className="min-w-0 flex-1">
+                        <div className="font-semibold text-gray-900 truncate">{supplier.company_name}</div>
+                        {supplier.contact_person && (
+                          <div className="text-sm text-gray-500 truncate">{supplier.contact_person}</div>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1 flex-shrink-0">
+                        <Link href={`/suppliers/${supplier.id}`}>
+                          <Button variant="ghost" size="icon" title="Detay">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                        </Link>
+                        <Link href={`/suppliers/${supplier.id}/edit`}>
+                          <Button variant="ghost" size="icon" title="Düzenle">
+                            <Edit className="w-4 h-4" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                    {supplier.phone && (
+                      <a href={`tel:${supplier.phone}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
+                        <Phone className="w-3 h-3" />
+                        {supplier.phone}
+                      </a>
+                    )}
+                    {supplier.email && (
+                      <a href={`mailto:${supplier.email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline truncate mt-0.5">
+                        <Mail className="w-3 h-3 flex-shrink-0" />
+                        <span className="truncate">{supplier.email}</span>
+                      </a>
+                    )}
+                    <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-100">
+                      <span className="text-sm text-gray-600">
+                        {[supplier.district, supplier.city].filter(Boolean).join(', ') || '-'}
+                      </span>
+                      <span className={supplier.total_debt && supplier.total_debt > 0 ? 'text-red-600 font-semibold' : 'text-green-600'}>
+                        {formatCurrency(supplier.total_debt || 0)}
+                      </span>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Masaüstü: Tablo görünümü */}
+            <div className="hidden md:block overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -177,6 +236,7 @@ export default function SuppliersPage() {
                 )}
               </TableBody>
             </Table>
+            </div>
           </CardContent>
         </Card>
       </div>

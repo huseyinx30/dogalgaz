@@ -162,10 +162,20 @@ function filterMenuByRole(items: MenuItem[], role: UserRole): MenuItem[] {
     .filter((item): item is MenuItem => item !== null);
 }
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   const pathname = usePathname();
-  const { profile, loading } = useAuth();
+  const { profile } = useAuth();
   const [expandedItems, setExpandedItems] = React.useState<string[]>([]);
+
+  // Mobilde sayfa değişince sidebar'ı kapat
+  React.useEffect(() => {
+    onClose?.();
+  }, [pathname]);
 
   const menuItems = React.useMemo(() => {
     const role = (profile?.role as UserRole) || 'personel';
@@ -197,10 +207,20 @@ export function Sidebar() {
     });
   }, []);
 
-  return (
-    <aside className="w-64 flex-shrink-0 bg-gray-900 text-white h-full flex flex-col" style={{ minWidth: '256px' }}>
-      <div className="p-4 border-b border-gray-800">
+  const sidebarContent = (
+    <>
+      <div className="p-4 border-b border-gray-800 flex items-center justify-between">
         <h1 className="text-xl font-bold text-white">Doğalgaz CRM</h1>
+        <button
+          type="button"
+          onClick={onClose}
+          className="lg:hidden p-2 -mr-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+          aria-label="Menüyü kapat"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
       <nav className="flex-1 overflow-y-auto p-4 space-y-2">
         {menuItems.map((item) => {
@@ -273,6 +293,19 @@ export function Sidebar() {
           );
         })}
       </nav>
+    </>
+  );
+
+  return (
+    <aside
+      className={cn(
+        'fixed lg:static inset-y-0 left-0 z-50 w-64 flex-shrink-0 bg-gray-900 text-white h-full flex flex-col transition-transform duration-300 ease-in-out',
+        'lg:translate-x-0',
+        isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+      )}
+      style={{ minWidth: '256px' }}
+    >
+      {sidebarContent}
     </aside>
   );
 }

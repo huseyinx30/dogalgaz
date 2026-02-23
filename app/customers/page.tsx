@@ -218,16 +218,16 @@ export default function CustomersPage() {
 
   return (
     <MainLayout>
-      <div className="space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Müşteriler</h1>
-            <p className="text-gray-700 mt-2 font-medium">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Müşteriler</h1>
+            <p className="text-gray-600 sm:text-gray-700 mt-1 sm:mt-2 text-sm sm:text-base font-medium">
               {loading ? 'Yükleniyor...' : `${customers.length} müşteri bulundu`}
             </p>
           </div>
-          <Link href="/customers/new">
-            <Button className="bg-blue-600 hover:bg-blue-700">
+          <Link href="/customers/new" className="w-full sm:w-auto">
+            <Button className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700">
               <Plus className="w-4 h-4 mr-2" />
               Yeni Müşteri
             </Button>
@@ -480,7 +480,63 @@ export default function CustomersPage() {
                 )}
               </div>
             ) : (
-              <div className="overflow-x-auto">
+              <>
+                {/* Mobil: Kart görünümü */}
+                <div className="md:hidden space-y-3">
+                  {filteredCustomers.map((customer) => (
+                    <div
+                      key={customer.id}
+                      className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div className="min-w-0 flex-1">
+                          <div className="font-semibold text-gray-900 truncate">{customer.contact_person}</div>
+                          {customer.company_name && (
+                            <div className="text-sm text-gray-500 truncate">{customer.company_name}</div>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          <Link href={`/customers/${customer.id}`}>
+                            <Button variant="ghost" size="icon" title="Detay">
+                              <Eye className="w-4 h-4" />
+                            </Button>
+                          </Link>
+                          <Link href={`/customers/${customer.id}/edit`}>
+                            <Button variant="ghost" size="icon" title="Düzenle">
+                              <Edit className="w-4 h-4" />
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                      {customer.phone && (
+                        <a href={`tel:${customer.phone}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
+                          <Phone className="w-3 h-3" />
+                          {customer.phone}
+                        </a>
+                      )}
+                      {customer.email && (
+                        <a href={`mailto:${customer.email}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline truncate mt-0.5">
+                          <Mail className="w-3 h-3 flex-shrink-0" />
+                          <span className="truncate">{customer.email}</span>
+                        </a>
+                      )}
+                      <div className="flex flex-wrap gap-2 mt-2 pt-2 border-t border-gray-100">
+                        <span className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded-full text-xs font-medium">
+                          {projectCounts[customer.id] || 0} proje
+                        </span>
+                        <span className={`text-sm font-semibold ${(accountBalances[customer.id] || 0) > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                          {formatCurrency(accountBalances[customer.id] || 0)}
+                        </span>
+                        <span className="text-xs text-gray-500 ml-auto">
+                          {formatDate(customer.created_at)}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Masaüstü: Tablo görünümü */}
+                <div className="hidden md:block overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
@@ -619,7 +675,8 @@ export default function CustomersPage() {
                     ))}
                   </TableBody>
                 </Table>
-              </div>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>

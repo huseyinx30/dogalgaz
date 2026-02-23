@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { Bell, Search, User, LogOut, ChevronDown } from 'lucide-react';
+import { Bell, Search, User, LogOut, ChevronDown, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
@@ -19,7 +19,11 @@ interface Notification {
   created_at: string;
 }
 
-export function Header() {
+interface HeaderProps {
+  onMenuClick?: () => void;
+}
+
+export function Header({ onMenuClick }: HeaderProps) {
   const router = useRouter();
   const [signingOut, setSigningOut] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
@@ -134,24 +138,34 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-3 shadow-sm relative z-50">
-      <div className="flex items-center justify-between gap-4">
-        <div className="shrink-0 min-w-[140px] px-4 py-2 rounded-lg bg-gray-50 border border-gray-200">
-          <p className="text-sm font-bold text-gray-800 truncate" title={companyName || undefined}>
-            {companyName || 'Doğalgaz CRM'}
-          </p>
+    <header className="bg-white border-b border-gray-200 px-3 sm:px-6 py-2 sm:py-3 shadow-sm relative z-50">
+      <div className="flex items-center justify-between gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 min-w-0">
+          <button
+            type="button"
+            onClick={onMenuClick}
+            className="lg:hidden p-2 -ml-1 rounded-lg hover:bg-gray-100 text-gray-700 flex-shrink-0"
+            aria-label="Menüyü aç"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+          <div className="shrink-0 min-w-0 max-w-[120px] sm:max-w-none sm:min-w-[140px] px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-gray-50 border border-gray-200">
+            <p className="text-xs sm:text-sm font-bold text-gray-800 truncate" title={companyName || undefined}>
+              {companyName || 'Doğalgaz CRM'}
+            </p>
+          </div>
         </div>
-        <div className="flex-1 max-w-xl min-w-0">
-          <div className="relative">
+        <div className="hidden sm:flex flex-1 max-w-xl min-w-0">
+          <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 w-5 h-5" />
             <Input
               type="search"
               placeholder="Ara..."
-              className="pl-10 text-gray-900 placeholder:text-gray-500"
+              className="pl-10 text-gray-900 placeholder:text-gray-500 w-full"
             />
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1 sm:gap-4">
           <div className="relative" ref={dropdownRef}>
             <Button
               variant="ghost"
@@ -165,7 +179,7 @@ export function Header() {
               )}
             </Button>
             {notificationsOpen && (
-              <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50">
+              <div className="absolute right-0 mt-2 w-[calc(100vw-2rem)] max-w-80 sm:w-80 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50">
                 <div className="p-3 border-b border-gray-200 bg-gray-50">
                   <h3 className="text-sm font-semibold text-gray-900">Bildirimler</h3>
                 </div>
@@ -228,13 +242,13 @@ export function Header() {
             <button
               type="button"
               onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg hover:bg-gray-100 transition-colors min-w-0"
             >
-              <span className="text-sm font-medium text-gray-700 max-w-[140px] truncate">
+              <span className="hidden sm:inline text-sm font-medium text-gray-700 max-w-[100px] sm:max-w-[140px] truncate">
                 {userProfile?.full_name || userProfile?.email || 'Kullanıcı'}
               </span>
               <User className="w-5 h-5 text-gray-700 flex-shrink-0" />
-              <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${userMenuOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`hidden sm:block w-4 h-4 text-gray-500 transition-transform flex-shrink-0 ${userMenuOpen ? 'rotate-180' : ''}`} />
             </button>
             {userMenuOpen && (
               <div className="absolute right-0 top-full mt-1 w-64 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50">
@@ -278,7 +292,7 @@ export function Header() {
             variant="ghost"
             size="icon"
             onClick={handleSignOut}
-            className="hover:bg-gray-100"
+            className="hidden sm:flex hover:bg-gray-100"
             disabled={signingOut}
             title="Çıkış Yap"
           >
