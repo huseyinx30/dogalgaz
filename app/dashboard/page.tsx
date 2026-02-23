@@ -477,7 +477,7 @@ export default function DashboardPage() {
 
   return (
     <MainLayout>
-      <div className="space-y-4 p-4">
+      <div className="space-y-4 p-3 sm:p-4">
         {/* Başlık Bölümü */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div>
@@ -488,7 +488,7 @@ export default function DashboardPage() {
               {isEkip && ekipTeamName ? ekipTeamName : (isEkip ? 'Muhasebe ve iş atamalarınız' : 'Sistem özeti ve istatistikler')}
             </p>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
             {loadError && (
               <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-50 border border-red-200">
                 <span className="text-xs text-red-700">{loadError}</span>
@@ -498,11 +498,11 @@ export default function DashboardPage() {
                 </Button>
               </div>
             )}
-            <div className="text-xs text-gray-700 font-semibold bg-gray-100 px-3 py-2 rounded-lg border border-gray-200">
+            <div className="text-xs text-gray-700 font-semibold bg-gray-100 px-3 py-2 rounded-lg border border-gray-200 truncate">
               {new Date().toLocaleDateString('tr-TR', { 
-                weekday: 'long', 
+                weekday: 'short', 
                 year: 'numeric', 
-                month: 'long', 
+                month: 'short', 
                 day: 'numeric' 
               })}
             </div>

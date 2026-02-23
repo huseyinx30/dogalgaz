@@ -11,7 +11,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const closeSidebar = useCallback(() => setSidebarOpen(false), []);
 
   return (
-    <div className="flex flex-row h-screen w-full bg-gray-50 overflow-hidden" style={{ minHeight: '100dvh' }}>
+    <div className="flex flex-row h-screen w-full max-w-full bg-gray-50 overflow-hidden" style={{ minHeight: '100dvh' }}>
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Header onMenuClick={openSidebar} />
@@ -19,10 +19,10 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
           {children}
         </main>
       </div>
-      {/* Mobil sidebar overlay */}
+      {/* Mobil sidebar overlay - menü açıkken arka plan karartma */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-black/60 z-[55] md:hidden"
           onClick={closeSidebar}
           aria-hidden="true"
         />

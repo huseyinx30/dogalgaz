@@ -144,7 +144,7 @@ export function Header({ onMenuClick }: HeaderProps) {
           <button
             type="button"
             onClick={onMenuClick}
-            className="lg:hidden p-2 -ml-1 rounded-lg hover:bg-gray-100 text-gray-700 flex-shrink-0"
+            className="md:hidden p-2 -ml-1 rounded-lg hover:bg-gray-100 text-gray-700 flex-shrink-0"
             aria-label="Menüyü aç"
           >
             <Menu className="w-6 h-6" />

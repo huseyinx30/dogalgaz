@@ -214,7 +214,7 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
         <button
           type="button"
           onClick={onClose}
-          className="lg:hidden p-2 -mr-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
+          className="md:hidden p-2 -mr-2 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
           aria-label="Menüyü kapat"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -299,9 +299,9 @@ export function Sidebar({ isOpen = false, onClose }: SidebarProps) {
   return (
     <aside
       className={cn(
-        'fixed lg:static inset-y-0 left-0 z-50 w-64 flex-shrink-0 bg-gray-900 text-white h-full flex flex-col transition-transform duration-300 ease-in-out',
-        'lg:translate-x-0',
-        isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        'fixed md:static inset-y-0 left-0 z-[60] w-64 max-w-[85vw] md:max-w-none flex-shrink-0 bg-gray-900 text-white h-full flex flex-col transition-transform duration-300 ease-in-out shadow-xl md:shadow-none',
+        'md:translate-x-0',
+        isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       )}
       style={{ minWidth: '256px' }}
     >
